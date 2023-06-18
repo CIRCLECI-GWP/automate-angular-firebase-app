@@ -3,7 +3,7 @@ orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
-    working_directory: ~/angular-project
+    working_directory: ~/angular-firebase-dir
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
@@ -16,11 +16,11 @@ jobs:
           name: Check install
       - checkout
       - restore_cache:
-          key: angular-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: angular-firebase-dir-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run: npm install
       - run: npm install --save-dev firebase-tools
       - save_cache:
-          key: angular-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: angular-firebase-dir-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - "node_modules"
       - run:

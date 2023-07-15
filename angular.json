@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "automate-angular-firebase-app": {
+    "angular-circle-ci-project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/automate-angular-firebase-app",
+            "outputPath": "dist/angular-circle-ci-project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -56,10 +56,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "automate-angular-firebase-app:build:production"
+              "browserTarget": "angular-circle-ci-project:build:production"
             },
             "development": {
-              "browserTarget": "automate-angular-firebase-app:build:development"
+              "browserTarget": "angular-circle-ci-project:build:development"
             }
           },
           "defaultConfiguration": "development"

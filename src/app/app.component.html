@@ -4,25 +4,23 @@
       <h2>{{ title }}</h2>
     </div>
     <div class="row">
-      <div *ngFor="let user of users" class="col-md-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ user.name }}</h5>
-
-            <div class="card-text">
-              <span>{{ user.address.city }}, {{ user.address.street }}</span>
-            </div>
-
-            <div>
-              <p>{{ user.phone }}</p>
-
-              <p>{{ user.email }}</p>
-
-              <p>{{ user.website }}</p>
+      @for (user of users; track user) {
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ user.name }}</h5>
+              <div class="card-text">
+                <span>{{ user.address.city }}, {{ user.address.street }}</span>
+              </div>
+              <div>
+                <p>{{ user.phone }}</p>
+                <p>{{ user.email }}</p>
+                <p>{{ user.website }}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
     </div>
   </div>
 </div>

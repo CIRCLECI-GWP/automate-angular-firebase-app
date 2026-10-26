@@ -6,10 +6,9 @@ import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/com
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-    declarations: [AppComponent],
-    imports: [],
-    providers: [UserService, provideHttpClient(withXhr(), withInterceptorsFromDi())]
-})
+      declarations: [AppComponent],
+      providers: [UserService, provideHttpClient(withXhr(), withInterceptorsFromDi())],
+    })
   );
 
   it('should create the app', () => {

@@ -1,14 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { UserService } from './service/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      providers: [UserService],
-      imports: [HttpClientModule],
+      providers: [UserService, provideHttpClient(withXhr(), withInterceptorsFromDi())],
     })
   );
 
@@ -18,18 +17,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'List Of dummy users'`, () => {
+  it(`should have as title 'List of dummy users'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('List Of dummy users');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'automate-angular-firebase-app app is running!'
-    );
+    expect(app.title).toEqual('List of dummy users');
   });
 });

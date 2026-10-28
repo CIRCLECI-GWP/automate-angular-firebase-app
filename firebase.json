@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/angular-circle-ci-project",
+    "public": "dist/angular-circle-ci-project/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

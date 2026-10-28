@@ -1,14 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { UserService } from './service/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      providers: [UserService],
-      imports: [HttpClientModule],
+      providers: [UserService, provideHttpClient(withXhr(), withInterceptorsFromDi())],
     })
   );
 

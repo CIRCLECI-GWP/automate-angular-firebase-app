@@ -1,18 +1,24 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { UserService } from './user.service';
-import { HttpClientModule } from '@angular/common/http';
 import { User } from '../user';
 
 describe('UserService', () => {
   let service: UserService;
+  let httpTesting: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      providers: [UserService],
+      providers: [UserService, provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(UserService);
+    httpTesting = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTesting.verify();
   });
 
   it('should be created', () => {
@@ -35,7 +41,7 @@ describe('UserService', () => {
         },
       },
       {
-        id: 1,
+        id: 2,
         name: 'Temi',
         email: 'tem@me.com',
         phone: '55242',
@@ -43,17 +49,20 @@ describe('UserService', () => {
         address: {
           street: 'Tems street',
           suite: '45',
-          city: 'LAgos',
+          city: 'Lagos',
           zipcode: '23401',
         },
       },
     ];
 
-    service.getUsers().subscribe((users) => {
-      expect(users.length).toBe(10);
-      expect(users).toEqual(dummyUsers);
-    });
+    let users: User[] | undefined;
+    service.getUsers().subscribe((result) => (users = result));
 
-    expect(dummyUsers).toHaveSize(2);
+    const req = httpTesting.expectOne(service.apiURL);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyUsers);
+
+    expect(users).toEqual(dummyUsers);
+    expect(users).toHaveSize(2);
   });
 });
